@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مختبر الفيزياء الذكي - الصف العاشر</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef3f6;--pn:#fff;--tx:#12303d;--mu:#5b7380;--ac:#0b7a75;--ac2:#e0574a;--gr:#d3dfe5;--hd:#0f3b4a;--hl:#e3f3f1}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1b21;--pn:#16272f;--tx:#e6f1f4;--mu:#93aab5;--ac:#3cc4bb;--ac2:#ff8a7c;--gr:#2b4450;--hd:#0a2a35;--hl:#17363a}}
+:root[data-theme="dark"]{--bg:#0e1b21;--pn:#16272f;--tx:#e6f1f4;--mu:#93aab5;--ac:#3cc4bb;--ac2:#ff8a7c;--gr:#2b4450;--hd:#0a2a35;--hl:#17363a}
+html,body{height:auto;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--tx);font-family:Tajawal,Tahoma,Arial,sans-serif;font-size:20px;margin:0}
+header{background:var(--hd);color:#fff;padding:14px 24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+header h1{font-size:28px;font-weight:800;margin:0}header small{opacity:.8;font-size:18px}
+.nb{background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:10px;padding:10px 18px;font:inherit;cursor:pointer;min-height:48px}
+.nb:hover{background:rgba(255,255,255,.26)}
+main{max-width:1280px;margin:0 auto;padding:20px}
+.ch{margin:26px 0 10px;font-size:26px;font-weight:800;border-right:6px solid var(--ac);padding-right:12px}
+.card{background:var(--pn);border:1px solid var(--gr);border-radius:14px;padding:18px;text-align:right;cursor:pointer;font:inherit;color:inherit;min-height:110px;width:100%}
+.card:hover{border-color:var(--ac);background:var(--hl)}
+.card b{display:block;font-size:22px;margin-bottom:4px}.card span{color:var(--mu);font-size:17px}
+.panel{background:var(--pn);border:1px solid var(--gr);border-radius:14px;padding:18px}
+.goal{background:var(--hl);border-radius:12px;padding:12px 16px;margin:10px 0 16px}
+.ctl{margin-bottom:18px}.ctl label{display:flex;justify-content:space-between;font-weight:700;margin-bottom:6px}
+.ctl output{color:var(--ac);direction:ltr;font-weight:800}
+input[type=range]{width:100%;height:36px;accent-color:var(--ac)}
+select{width:100%;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--gr);background:var(--pn);color:var(--tx)}
+canvas{width:100%;height:auto;background:var(--pn);border:1px solid var(--gr);border-radius:12px;display:block}
+.res{margin-top:14px;font-size:22px;line-height:1.9}
+.eq{direction:ltr;text-align:center;background:var(--bg);border-radius:10px;padding:6px 12px;margin:6px 0;font-weight:700;font-size:23px}
+.ok{color:var(--ac);font-weight:800}.hot{color:var(--ac2);font-weight:800}
+details{background:var(--bg);border-radius:10px;padding:10px 14px;margin:8px 0}summary{cursor:pointer;font-weight:700}
+@media (max-width:640px){body{font-size:18px}header h1{font-size:22px}}
+:root{--bg:#f2f5fb;--pn:#fff;--tx:#0f1f3d;--mu:#566891;--ac:#1f4fd8;--ac2:#f26b21;--gr:#d9e1f2;--hd:#0b1d4a;--hl:#e6edfc}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1228;--pn:#121c3a;--tx:#e8eeff;--mu:#9aa9cf;--ac:#7aa0ff;--ac2:#ff9150;--gr:#243259;--hd:#070e24;--hl:#18264d}}
+:root[data-theme="dark"]{--bg:#0a1228;--pn:#121c3a;--tx:#e8eeff;--mu:#9aa9cf;--ac:#7aa0ff;--ac2:#ff9150;--gr:#243259;--hd:#070e24;--hl:#18264d}
+body{background-image:linear-gradient(var(--gr) 1px,transparent 1px),linear-gradient(90deg,var(--gr) 1px,transparent 1px);background-size:36px 36px}
+header{background:linear-gradient(120deg,var(--hd),#173a9c);border-bottom:5px solid var(--ac2);padding:20px 28px}
+header h1{font-size:34px}
+.hero{display:flex;gap:24px;align-items:center;background:var(--pn);border:2px solid var(--ac);border-radius:22px;padding:18px 26px;color:var(--ac);margin-bottom:6px}
+.hero h2{color:var(--tx);font-size:28px;margin:0 0 4px;font-weight:800}.hero p{margin:0;color:var(--mu)}
+.ch{border-right-color:var(--ac2)}
+.card{border-radius:20px;border:2px solid var(--gr);transition:transform .15s,box-shadow .15s;display:block}
+.card:hover{transform:translateY(-3px);border-color:var(--ac);box-shadow:0 14px 26px -14px var(--ac)}
+.card em{font-style:normal;font-size:40px;display:block;margin-bottom:6px}
+.panel{border-radius:18px;box-shadow:0 8px 24px -16px var(--ac)}
+.res{border-right:6px solid var(--ac2)}
+.eq{background:var(--hl);border:1px solid var(--gr)}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:12px;padding:10px 20px;font:inherit;font-weight:700;cursor:pointer;min-height:50px;margin:4px}
+.btn.alt{background:var(--hl);color:var(--ac);border:2px solid var(--ac)}
+.btn.good{background:#15803d}.btn.bad{background:#c62828}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--gr)}
+.inp{font:inherit;padding:10px;border-radius:10px;border:2px solid var(--gr);width:160px;background:var(--pn);color:var(--tx);direction:ltr}
+.tb{width:100%;border-collapse:collapse;direction:ltr;text-align:center;font-size:20px}.tb th,.tb td{border:1px solid var(--gr);padding:6px}.tb th{background:var(--hl)}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<header>
+ <div><h1>مختبر الفيزياء الذكي - الصف العاشر</h1><small>إعداد الأستاذ: محمد حجاب</small></div>
+ <div class="flex gap-2"><button class="nb" onclick="home()">🏠 الرئيسية</button><button class="nb" onclick="document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()">⛶ ملء الشاشة</button></div>
+</header>
+<main>
+ <section id="home"></section>
+ <section id="lab" hidden>
+  <button class="nb" style="background:var(--ac)" onclick="home()">→ رجوع إلى الدروس</button>
+  <h2 id="lt" class="ch" style="margin-top:14px"></h2>
+  <div class="goal" id="lg"></div>
+  <div class="grid gap-4 lg:grid-cols-3">
+   <div class="panel" id="ctls"></div>
+   <div class="lg:col-span-2"><canvas id="cv" width="900" height="460"></canvas><div class="panel res" id="res"></div></div>
+  </div>
+ </section>
+</main>
+<script>
+const $=s=>document.querySelector(s),f=n=>String(+(+n).toFixed(2)),R=Math.PI/180,g9=9.8;
+const css=k=>getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+const PR=[['جيجا (G)',9],['ميجا (M)',6],['كيلو (k)',3],['الوحدة الأساسية',0],['مللي (m)',-3],['ميكرو (μ)',-6],['نانو (n)',-9]];
+const CH=[
+ ['الوحدة الأولى - الفصل الأول: علم الفيزياء',['disc','units']],
+ ['الفصل الثاني: الحركة في بعد واحد',['dist','eqs','fall']],
+ ['الفصل الثالث: الحركة في بعدين',['resolve','add','prod','proj']]];
+function ax(G,x0,x1,y0,y1,xl,yl){const c=G.c,p=56;c.clearRect(0,0,G.w,G.h);c.font='16px Tajawal,sans-serif';c.lineWidth=1;
+ const fx=x=>p+(x-x0)/(x1-x0)*(G.w-p-24),fy=y=>G.h-p-(y-y0)/(y1-y0)*(G.h-p-24);
+ for(let i=0;i<=5;i++){const x=x0+(x1-x0)*i/5,y=y0+(y1-y0)*i/5;c.strokeStyle=css('--gr');c.beginPath();c.moveTo(fx(x),fy(y0));c.lineTo(fx(x),fy(y1));c.moveTo(fx(x0),fy(y));c.lineTo(fx(x1),fy(y));c.stroke();
+  c.fillStyle=css('--mu');c.textAlign='center';c.fillText(f(x),fx(x),G.h-p+22);c.textAlign='right';c.fillText(f(y),p-6,fy(y)+5)}
+ c.fillStyle=css('--tx');c.textAlign='center';c.fillText(xl,G.w/2,G.h-8);c.save();c.translate(14,G.h/2);c.rotate(-Math.PI/2);c.fillText(yl,0,0);c.restore();return{fx,fy}}
+function ln(G,A,pts,col,dash,w){const c=G.c;c.strokeStyle=col;c.lineWidth=w||3;c.setLineDash(dash||[]);c.beginPath();pts.forEach((p,i)=>i?c.lineTo(A.fx(p[0]),A.fy(p[1])):c.moveTo(A.fx(p[0]),A.fy(p[1])));c.stroke();c.setLineDash([])}
+function arr(G,x0,y0,x1,y1,col,t,dash){const c=G.c,a=Math.atan2(y1-y0,x1-x0);c.strokeStyle=c.fillStyle=col;c.lineWidth=4;c.setLineDash(dash||[]);c.beginPath();c.moveTo(x0,y0);c.lineTo(x1,y1);c.stroke();c.setLineDash([]);
+ if(!dash){c.beginPath();c.moveTo(x1,y1);c.lineTo(x1-14*Math.cos(a-.4),y1-14*Math.sin(a-.4));c.lineTo(x1-14*Math.cos(a+.4),y1-14*Math.sin(a+.4));c.fill()}
+ if(t){c.font='bold 20px Tajawal,sans-serif';c.textAlign='center';c.fillText(t,(x0+x1)/2+10,(y0+y1)/2-10)}}
+function vcanvas(G,s){const c=G.c;c.clearRect(0,0,G.w,G.h);const O=[G.w/2,G.h/2];c.strokeStyle=css('--gr');c.lineWidth=1;c.beginPath();c.moveTo(0,O[1]);c.lineTo(G.w,O[1]);c.moveTo(O[0],0);c.lineTo(O[0],G.h);c.stroke();return(x,y)=>[O[0]+x*s,O[1]-y*s]}
+const M={
+disc:{t:'اكتشف بنفسك (1) - (2) - (3)',goal:'تنمية مهارة طرح الأسئلة الفيزيائية وتحديد مجال الفيزياء المناسب.',ctl:[],nc:1,
+ run:()=>`<details open><summary>(1) صور الكون وتلسكوب هابل</summary>اطرح أسئلة فيزيائية: كيف تتشكل المجرات؟ ما سبب اختلاف ألوان النجوم؟ كيف تُقاس المسافات الهائلة؟</details>
+<details><summary>(2) غروب الشمس مقابل سرعة سيارة في مضمار</summary>وصف الغروب وصف نوعي (جميل، أحمر)، أما سرعة السيارة فوصف كمي دقيق (مقدار ووحدة) تتيحه الفيزياء والرياضيات.</details>
+<details><summary>(3) مشاريع مركز الكويت الوطني لأبحاث الفضاء</summary><b>هبوط مسبار</b>: فيزياء كلاسيكية. <b>ثقب أسود</b>: فيزياء حديثة (النسبية). <b>معالج ذكي</b>: فيزياء حديثة (أشباه الموصلات والكم).</details>`},
+units:{t:'الكميات الفيزيائية ووحدات النظام الدولي (SI)',goal:'التحويل بين مضاعفات الوحدات باستخدام القوى العشرية.',nc:1,
+ ctl:[{k:'v',l:'القيمة',min:1,max:999,step:1,v:250},{k:'a',l:'من',t:'s',o:PR,v:3},{k:'b',l:'إلى',t:'s',o:PR,v:0}],
+ run:v=>{const r=v.v*10**(v.a-v.b);return`<div class="eq">${v.v} × 10<sup>${v.a}</sup> ÷ 10<sup>${v.b}</sup> = ${v.v} × 10<sup>${v.a-v.b}</sup></div><p>النتيجة = <span class="ok" dir="ltr">${Number(r.toPrecision(6))}</span> (بالوحدة المختارة).</p><p>الكمية الفيزيائية قابلة للقياس ولها وحدة، مثل الطول والكتلة والزمن، بخلاف الجمال أو الشجاعة.</p>`}},
+dist:{t:'الدرس 1-2: المسافة (d) والإزاحة (Δx) والسرعة',goal:'التمييز بين الكمية العددية (المسافة، السرعة العددية) والمتجهة (الإزاحة، السرعة المتجهة).',
+ ctl:[{k:'a',l:'نقطة الانعطاف (م)',min:-10,max:10,step:1,v:8},{k:'b',l:'نقطة النهاية (م)',min:-10,max:10,step:1,v:-2},{k:'t',l:'الزمن الكلي (ث)',min:1,max:20,step:1,v:4}],
+ draw:(G,v)=>{const c=G.c,X=x=>G.w/2+x*(G.w-80)/24,y=G.h/2;c.clearRect(0,0,G.w,G.h);c.strokeStyle=css('--tx');c.lineWidth=2;c.beginPath();c.moveTo(X(-12),y);c.lineTo(X(12),y);c.stroke();c.fillStyle=css('--mu');c.font='16px Tajawal';c.textAlign='center';for(let i=-10;i<=10;i+=2)c.fillText(i,X(i),y+24);
+ c.lineWidth=4;c.strokeStyle=css('--ac');c.beginPath();c.moveTo(X(0),y);c.quadraticCurveTo(X(v.a/2),y-90,X(v.a),y);c.stroke();c.beginPath();c.moveTo(X(v.a),y);c.quadraticCurveTo(X((v.a+v.b)/2),y-90,X(v.b),y);c.stroke();
+ arr(G,X(0),y+60,X(v.b),y+60,css('--ac2'),'Δx');c.fillStyle=css('--tx');c.beginPath();c.arc(X(0),y,8,0,7);c.fill()},
+ run:v=>{const d=Math.abs(v.a)+Math.abs(v.b-v.a),dx=v.b;return`<div class="eq">d = |${v.a}| + |${v.b}−${v.a}| = <span class="ok">${f(d)} m</span></div><div class="eq">Δx = x₂ − x₁ = <span class="hot">${f(dx)} m</span></div><div class="eq">السرعة العددية = d/t = ${f(d/v.t)} m/s</div><div class="eq">السرعة المتجهة = Δx/t = ${f(dx/v.t)} m/s</div><p>المسافة لا تكون سالبة، أما الإزاحة فتحمل اتجاهًا (إشارتها).</p>`}},
+eqs:{t:'الدرس 2-2: معادلات الحركة المتسارعة بانتظام',goal:'حساب السرعة النهائية والإزاحة، وقراءة الرسم (السرعة - الزمن): الميل = التسارع والمساحة = الإزاحة.',
+ ctl:[{k:'u',l:'السرعة الابتدائية v₀ (m/s)',min:-10,max:30,step:1,v:5},{k:'a',l:'التسارع a (m/s²)',min:-10,max:10,step:.5,v:2},{k:'t',l:'الزمن t (s)',min:1,max:10,step:.5,v:5}],
+ draw:(G,v)=>{const w=v.u+v.a*v.t,lo=Math.min(0,v.u,w)-1,hi=Math.max(0,v.u,w)+1,A=ax(G,0,v.t,lo,hi,'الزمن t (s)','السرعة v (m/s)');ln(G,A,[[0,0],[v.t,0]],css('--mu'),[4,4],1);G.c.fillStyle=css('--ac')+'33';G.c.beginPath();G.c.moveTo(A.fx(0),A.fy(0));G.c.lineTo(A.fx(0),A.fy(v.u));G.c.lineTo(A.fx(v.t),A.fy(w));G.c.lineTo(A.fx(v.t),A.fy(0));G.c.fill();ln(G,A,[[0,v.u],[v.t,w]],css('--ac'))},
+ run:v=>{const w=v.u+v.a*v.t,d=v.u*v.t+.5*v.a*v.t*v.t;return`<div class="eq">v = v₀ + a·t = ${f(v.u)} + ${f(v.a)}×${v.t} = <span class="ok">${f(w)} m/s</span></div><div class="eq">Δx = v₀t + ½at² = <span class="ok">${f(d)} m</span></div><div class="eq">v² = v₀² + 2aΔx → ${f(w*w)} = ${f(v.u*v.u+2*v.a*d)} ✔</div><p>ميل الخط = التسارع = <span class="hot">${f(v.a)}</span>، والمساحة المظللة = الإزاحة.</p>`}},
+fall:{t:'الدرس 3-2: السقوط الحر وقياس تسارع الجاذبية',goal:'استنتاج g من العلاقة 2h = g·t²، ودراسة القذف الرأسي للأعلى (إهمال مقاومة الهواء).',
+ ctl:[{k:'h',l:'الارتفاع الابتدائي h₀ (m)',min:0,max:100,step:1,v:45},{k:'u',l:'سرعة القذف للأعلى v₀ (m/s)',min:0,max:30,step:1,v:0}],
+ draw:(G,v)=>{const T=(v.u+Math.sqrt(v.u*v.u+2*g9*v.h))/g9||1,H=v.h+v.u*v.u/(2*g9)||1,A=ax(G,0,T,0,H*1.1,'الزمن t (s)','الارتفاع y (m)'),p=[];for(let i=0;i<=60;i++){const t=T*i/60;p.push([t,Math.max(0,v.h+v.u*t-.5*g9*t*t)])}ln(G,A,p,css('--ac'))},
+ run:v=>{const s=Math.sqrt(v.u*v.u+2*g9*v.h),T=(v.u+s)/g9,H=v.h+v.u*v.u/(2*g9);return`<div class="eq">زمن التحليق t = ${f(T)} s</div><div class="eq">أقصى ارتفاع = h₀ + v₀²/2g = <span class="ok">${f(H)} m</span></div><div class="eq">السرعة لحظة الاصطدام = √(v₀²+2gh₀) = <span class="hot">${f(s)} m/s</span></div>${v.u==0&&v.h>0?`<div class="eq">g = 2h/t² = 2×${v.h}/${f(T)}² = <span class="ok">${f(2*v.h/T/T)} m/s²</span></div>`:'<p>اجعل v₀ = 0 لقياس g من السقوط الحر.</p>'}`}},
+resolve:{t:'الدرس 2-3: تحليل المتجهات إلى مركبتين',goal:'تفكيك متجه مائل إلى مركبة أفقية Aₓ = A cosθ ومركبة رأسية A_y = A sinθ.',
+ ctl:[{k:'A',l:'مقدار المتجه A',min:1,max:20,step:1,v:15},{k:'th',l:'الزاوية θ (°)',min:0,max:360,step:1,v:37}],
+ draw:(G,v)=>{const P=vcanvas(G,(G.h/2-30)/20),x=v.A*Math.cos(v.th*R),y=v.A*Math.sin(v.th*R),o=P(0,0),a=P(x,y);arr(G,o[0],o[1],P(x,0)[0],P(x,0)[1],css('--ac'),'Aₓ',[6,5]);arr(G,P(x,0)[0],P(x,0)[1],a[0],a[1],css('--ac'),'',[6,5]);arr(G,o[0],o[1],P(0,y)[0],P(0,y)[1],css('--ac2'),'A_y',[6,5]);arr(G,o[0],o[1],a[0],a[1],css('--tx'),'A')},
+ run:v=>{const x=v.A*Math.cos(v.th*R),y=v.A*Math.sin(v.th*R);return`<div class="eq">Aₓ = ${v.A} cos ${v.th}° = <span class="ok">${f(x)}</span></div><div class="eq">A_y = ${v.A} sin ${v.th}° = <span class="hot">${f(y)}</span></div><div class="eq">√(Aₓ²+A_y²) = ${f(Math.hypot(x,y))} = A ✔</div>`}},
+add:{t:'الدرس 2-3: جمع المتجهات',goal:'إيجاد المحصلة R لمتجهين: في نفس الاتجاه، متعاكسين، أو متعامدين (فيثاغورث).',
+ ctl:[{k:'A',l:'المتجه A',min:1,max:20,step:1,v:12},{k:'a',l:'زاوية A (°)',min:0,max:360,step:1,v:0},{k:'B',l:'المتجه B',min:1,max:20,step:1,v:9},{k:'b',l:'زاوية B (°)',min:0,max:360,step:1,v:90}],
+ draw:(G,v)=>{const P=vcanvas(G,(G.h/2-30)/(v.A+v.B)),ax_=v.A*Math.cos(v.a*R),ay=v.A*Math.sin(v.a*R),bx=v.B*Math.cos(v.b*R),by=v.B*Math.sin(v.b*R),o=P(0,0),p=P(ax_,ay);arr(G,o[0],o[1],p[0],p[1],css('--ac'),'A');arr(G,p[0],p[1],P(ax_+bx,ay+by)[0],P(ax_+bx,ay+by)[1],css('--ac2'),'B');arr(G,o[0],o[1],P(ax_+bx,ay+by)[0],P(ax_+bx,ay+by)[1],css('--tx'),'R')},
+ run:v=>{const x=v.A*Math.cos(v.a*R)+v.B*Math.cos(v.b*R),y=v.A*Math.sin(v.a*R)+v.B*Math.sin(v.b*R),d=Math.abs(v.b-v.a)%360,n=d==0?'نفس الاتجاه: R = A + B':d==180?'متعاكسان: R = |A − B|':d==90||d==270?'متعامدان: R = √(A²+B²)، tanθ = B/A':'';return`<div class="eq">Rₓ = ${f(x)} , R_y = ${f(y)}</div><div class="eq">R = <span class="ok">${f(Math.hypot(x,y))}</span> , θ = <span class="hot">${f((Math.atan2(y,x)/R+360)%360)}°</span></div><p>${n}</p>`}},
+prod:{t:'الدرس 3-3: ضرب المتجهات',goal:'الضرب العددي A·B = AB cosθ (كمية عددية)، والاتجاهي A×B = AB sinθ (كمية متجهة، قاعدة اليد اليمنى).',
+ ctl:[{k:'A',l:'المتجه A',min:1,max:10,step:1,v:8},{k:'B',l:'المتجه B',min:1,max:10,step:1,v:6},{k:'th',l:'الزاوية بينهما θ (°)',min:0,max:180,step:1,v:60}],
+ draw:(G,v)=>{const P=vcanvas(G,(G.h/2-30)/10),o=[G.w/4,G.h*.7];arr(G,o[0],o[1],o[0]+v.A*(G.h/2-30)/10,o[1],css('--ac'),'A');arr(G,o[0],o[1],o[0]+v.B*Math.cos(v.th*R)*(G.h/2-30)/10,o[1]-v.B*Math.sin(v.th*R)*(G.h/2-30)/10,css('--ac2'),'B');G.c.fillStyle=css('--tx');G.c.font='bold 22px Tajawal';G.c.textAlign='center';G.c.fillText(v.th%180?'A×B: خارج من الصفحة ⊙ (الإبهام)':'sinθ = 0 → A×B = 0',G.w*.65,60)},
+ run:v=>`<div class="eq">A·B = ${v.A}×${v.B}×cos ${v.th}° = <span class="ok">${f(v.A*v.B*Math.cos(v.th*R))}</span></div><div class="eq">|A×B| = ${v.A}×${v.B}×sin ${v.th}° = <span class="hot">${f(v.A*v.B*Math.sin(v.th*R))}</span></div><p>اتجاه A×B: لُفّ أصابع اليد اليمنى من A إلى B بأقصر زاوية، فيشير الإبهام إلى اتجاه الناتج (هنا خارج الصفحة).</p>`},
+proj:{t:'الدرس 4-3: حركة المقذوفات',goal:'تحليل الحركة إلى أفقية منتظمة ورأسية بتسارع g، ودراسة أثر زاوية القذف (θ و 90−θ يعطيان نفس المدى).',
+ ctl:[{k:'u',l:'سرعة القذف v₀ (m/s)',min:5,max:50,step:1,v:30},{k:'th',l:'زاوية القذف θ (°)',min:5,max:85,step:1,v:30}],
+ draw:(G,v)=>{const q=a=>{const T=2*v.u*Math.sin(a*R)/g9;return{T,R:v.u**2*Math.sin(2*a*R)/g9,H:(v.u*Math.sin(a*R))**2/(2*g9)}},a=q(v.th),b=q(90-v.th),A=ax(G,0,Math.max(a.R,b.R,1)*1.05,0,Math.max(a.H,b.H,1)*1.3,'المدى الأفقي (m)','الارتفاع (m)'),tr=(an,Q)=>{const p=[];for(let i=0;i<=60;i++){const t=Q.T*i/60;p.push([v.u*Math.cos(an*R)*t,v.u*Math.sin(an*R)*t-.5*g9*t*t])}return p};ln(G,A,tr(90-v.th,b),css('--ac2'),[8,6],2);ln(G,A,tr(v.th,a),css('--ac'))},
+ run:v=>{const T=2*v.u*Math.sin(v.th*R)/g9;return`<div class="eq">زمن أقصى ارتفاع = v₀sinθ/g = ${f(T/2)} s ، زمن التحليق = <span class="ok">${f(T)} s</span></div><div class="eq">المدى R = v₀²sin2θ/g = <span class="ok">${f(v.u**2*Math.sin(2*v.th*R)/g9)} m</span></div><div class="eq">أقصى ارتفاع h = (v₀sinθ)²/2g = <span class="hot">${f((v.u*Math.sin(v.th*R))**2/(2*g9))} m</span></div><p>الخط المتقطع: الزاوية المتممة ${90-v.th}° لها المدى نفسه. جرّب 45° لأبعد مدى.</p>`}}};
+CH[0][1].push('qty');CH[1][1]=['dist','xt','track','eqs','tube','gexp','fall','solve'];CH[2][1].push('solve2');
+const IC={disc:'🔭',units:'📏',qty:'🧮',dist:'🛣️',xt:'📈',track:'🛤️',eqs:'🚗',tube:'🪶',gexp:'⏱️',fall:'🍎',solve:'✏️',resolve:'📐',add:'➕',prod:'✋',proj:'🎯',solve2:'✏️'};
+let RAF,TA,CP,NZ=[.3,-.5,.8,-.2,.6],SA={};
+const rr=()=>{NZ=NZ.map(()=>Math.random()*2-1)};
+const SORT=[[['قابلة للقياس','غير قابلة'],[['طول الكتاب المدرسي',0],['مدى حبّك لأخيك',1],['شغفك بدراسة الفيزياء',1],['زمن الحصة الدراسية',0]]],
+[['عددية','متجهة'],[['الكتلة',0],['القوة',1],['المسافة',0],['الإزاحة',1],['الزمن',0],['التسارع',1],['السرعة المتجهة',1],['درجة الحرارة',0]]],
+[['أساسية','مشتقة'],[['الطول',0],['الكتلة',0],['الزمن',0],['السرعة',1],['المساحة',1],['الحجم',1]]]];
+function pick(s,i,k){SA[s+'_'+i]=k;UP()}
+M.qty={t:'الكميات الفيزيائية: تصنيف تفاعلي',goal:'تصنيف الكميات بحسب القياس والاتجاه والاستقلالية (اكتشف بنفسك في الفصل الأول والدرس 1-2).',nc:1,
+ctl:[{k:'s',l:'نوع التصنيف',t:'s',o:[['قابلية القياس',0],['عددية أم متجهة',1],['أساسية أم مشتقة',2]],v:0}],
+run:v=>{const[c,L]=SORT[v.s];let ok=0;const h=L.map(([n,r],i)=>{const a=SA[v.s+'_'+i];if(a===r)ok++;return`<div class="row"><b>${n}</b><span>${c.map((x,k)=>`<button class="btn${a===k?(k===r?' good':' bad'):' alt'}" onclick="pick(${v.s},${i},${k})">${x}</button>`).join('')}</span></div>`}).join('');return h+`<p>الإجابات الصحيحة: <span class="ok">${ok}</span> من ${L.length}</p>`}};
+M.xt={t:'الدرس 1-2: منحنى (الإزاحة - الزمن) والميل',goal:'الميل = السرعة المتجهة؛ والخط المستقيم يعني سرعة ثابتة (اكتشف بنفسك 4).',
+ctl:[{k:'x',l:'الموضع الابتدائي x₀ (m)',min:-10,max:10,step:1,v:0},{k:'u',l:'السرعة المتجهة (m/s)',min:-10,max:10,step:1,v:5},{k:'T',l:'الزمن (s)',min:1,max:10,step:1,v:6}],
+draw:(G,v)=>{const e=v.x+v.u*v.T,A=ax(G,0,v.T,Math.min(v.x,e,0)-1,Math.max(v.x,e,0)+1,'الزمن t (s)','الإزاحة x (m)');ln(G,A,[[0,0],[v.T,0]],css('--mu'),[4,4],1);ln(G,A,[[0,v.x],[v.T,e]],css('--ac'));G.c.fillStyle=css('--ac2');[[0,v.x],[v.T,e]].forEach(p=>{G.c.beginPath();G.c.arc(A.fx(p[0]),A.fy(p[1]),7,0,7);G.c.fill()})},
+run:v=>`<div class="eq">الميل = Δx/Δt = (${f(v.x+v.u*v.T)} − ${v.x})/${v.T} = <span class="ok">${f(v.u)} m/s</span></div><p>${v.u==0?'الجسم ساكن (الميل صفر).':'السرعة ثابتة '+(v.u>0?'في الاتجاه الموجب':'في الاتجاه السالب')+'، والميل يمثل السرعة المتجهة.'}</p>`};
+M.track={t:'نشاط عملي (1): قياس تسارع جسم على المضمار الهوائي',goal:'عربة على مضمار هوائي تجرّها كتلة معلّقة، وبوابتان ضوئيتان تقيسان السرعتين والزمن؛ ثم نحسب التسارع ومتوسطه.',
+ctl:[{k:'m',l:'الكتلة المعلّقة m (g)',min:10,max:100,step:5,v:50},{k:'M',l:'كتلة العربة M (g)',min:100,max:500,step:10,v:300},{k:'d',l:'المسافة بين البوابتين (cm)',min:20,max:100,step:5,v:60}],
+draw:(G,v)=>{const c=G.c,y=190,px=G.w-90,g1=300,g2=300+v.d*4.5;c.clearRect(0,0,G.w,G.h);c.lineWidth=4;c.strokeStyle=css('--tx');c.beginPath();c.moveTo(40,y+34);c.lineTo(px,y+34);c.stroke();c.fillStyle=css('--ac');c.fillRect(150,y-16,100,50);c.strokeStyle=css('--mu');c.lineWidth=2;c.beginPath();c.moveTo(250,y);c.lineTo(px,y);c.lineTo(px,y+150);c.stroke();c.beginPath();c.arc(px,y+8,10,0,7);c.stroke();c.fillStyle=css('--ac2');c.fillRect(px-22,y+150,44,44);[g1,g2].forEach(x=>c.fillRect(x-3,y-70,6,100));c.fillStyle=css('--tx');c.font='bold 20px Tajawal';c.textAlign='center';c.fillText('M',200,y+16);c.fillText('m',px,y+224);c.fillText('بوابة 1',g1,y-82);c.fillText('بوابة 2',g2,y-82)},
+run:v=>{const a=v.m/(v.m+v.M)*g9,d=v.d/100,u=.2;let s=0;const rows=[0,1,2].map(i=>{const v0=u*(1+NZ[i]*.03),v1=Math.sqrt(v0*v0+2*a*d)*(1+NZ[i+1]*.02),dt=2*d/(v0+v1)*(1+NZ[i+2]*.02),ac=(v1-v0)/dt;s+=ac;return`<tr><td>${i+1}</td><td>${f(v0)}</td><td>${f(v1)}</td><td>${f(dt)}</td><td class="ok">${f(ac)}</td></tr>`}).join('');return`<table class="tb"><tr><th>التكرار</th><th>v₀ (m/s)</th><th>v (m/s)</th><th>Δt (s)</th><th>a (m/s²)</th></tr>${rows}</table><div class="eq">المتوسط الحسابي للتسارع = <span class="hot">${f(s/3)} m/s²</span></div><p>القيمة النظرية a = mg/(M+m) = ${f(a)} m/s²</p><button class="btn" onclick="rr();UP()">🔁 كرّر التجربة</button>`}};
+function fr(){const{G,a,y}=TA,c=G.c,x=G.w/2,k=(G.h-150)/1.5;c.clearRect(0,0,G.w,G.h);c.fillStyle=css('--hl');c.strokeStyle=css('--tx');c.lineWidth=4;c.beginPath();c.roundRect(x-150,16,300,G.h-32,24);c.fill();c.stroke();c.fillStyle=css('--mu');for(let i=0;i<a*1.2;i++)c.fillRect(x-140+(i*47%280),30+(i*89%(G.h-70)),3,3);c.font='46px serif';c.textAlign='center';c.fillText('🪶',x-70,90+y[0]*k);c.fillText('🪙',x+70,90+y[1]*k)}
+function drop(){cancelAnimationFrame(RAF);Object.assign(TA,{y:[0,0],v:[0,0],d:[0,0],t:0});let l=performance.now();const K=[6,.15],st=n=>{const dt=Math.min((n-l)/1e3,.05)*.5;l=n;TA.t+=dt;for(let i=0;i<2;i++)if(!TA.d[i]){TA.v[i]+=(g9-K[i]*TA.a/100*TA.v[i])*dt;TA.y[i]+=TA.v[i]*dt;if(TA.y[i]>=1.5){TA.y[i]=1.5;TA.d[i]=TA.t}}fr();if(TA.d[0]&&TA.d[1]){const df=TA.d[0]-TA.d[1];$('#tres').textContent=Math.abs(df)<.03?'وصلت الريشة والعملة معًا: في غياب الهواء يتساوى تسارعهما (g).':'وصلت العملة أولًا بفارق '+f(df)+' ث بسبب مقاومة الهواء.'}else RAF=requestAnimationFrame(st)};RAF=requestAnimationFrame(st)}
+M.tube={t:'نشاط عملي (2): أيهما يسقط أولًا؟',goal:'ريشة وعملة معدنية في أنبوبة زجاجية: قارن السقوط بوجود الهواء وبعد تفريغه بالمضخة (الحركة مبطّأة للمشاهدة).',
+ctl:[{k:'a',l:'نسبة الهواء في الأنبوبة (%)',min:0,max:100,step:5,v:100}],
+draw:(G,v)=>{cancelAnimationFrame(RAF);TA={G,a:v.a,y:[0,0],v:[0,0],d:[0,0],t:0};fr()},
+run:v=>`<button class="btn" onclick="drop()">⬇ أسقِط الريشة والعملة</button><p>الهواء ${v.a}% — ${v.a<10?'أنبوبة شبه مفرّغة (سقوط حر).':'مقاومة الهواء تبطئ الريشة أكثر من العملة.'}</p><div id="tres" class="hot"></div>`};
+const sl=P=>P.reduce((a,p)=>a+p[0]*p[1],0)/P.reduce((a,p)=>a+p[0]*p[0],0);
+M.gexp={t:'نشاط عملي (3): قياس تسارع الجاذبية الأرضية',goal:'أسقِط كرة من ارتفاعات مختلفة وسجّل الزمن، ثم ارسم 2Δx مقابل t²؛ ميل الخط = g.',
+ctl:[{k:'e',l:'خطأ القياس (%)',min:0,max:8,step:1,v:3}],
+pts:v=>[.2,.4,.6,.8,1].map((h,i)=>{const t=Math.sqrt(2*h/g9)*(1+NZ[i]*v.e/100);return[t*t,2*h,h,t]}),
+draw:(G,v)=>{const P=M.gexp.pts(v),s=sl(P),A=ax(G,0,.25,0,2.6,'t² (s²)','2Δx (m)');ln(G,A,[[0,0],[.25,s*.25]],css('--ac'),[8,6],2);G.c.fillStyle=css('--ac2');P.forEach(p=>{G.c.beginPath();G.c.arc(A.fx(p[0]),A.fy(p[1]),8,0,7);G.c.fill()})},
+run:v=>{const P=M.gexp.pts(v);return`<table class="tb"><tr><th>Δx (m)</th><th>t (s)</th><th>t² (s²)</th><th>2Δx (m)</th></tr>${P.map(p=>`<tr><td>${p[2]}</td><td>${+p[3].toFixed(3)}</td><td>${+p[0].toFixed(3)}</td><td>${p[1]}</td></tr>`).join('')}</table><div class="eq">من 2Δx = g·t² : الميل = g ≈ <span class="ok">${f(sl(P))} m/s²</span></div><button class="btn" onclick="rr();UP()">🔁 أعد القياس</button>`}};
+const mk=(t,goal,P)=>({t,goal,nc:1,ctl:[{k:'p',l:'اختر المسألة',t:'s',o:P.map((p,i)=>['مسألة '+(i+1),i]),v:0}],run:v=>{CP=P;const p=P[v.p];return`<p>${p.q}</p><div class="flex flex-wrap gap-2 items-center"><input id="ans" class="inp" type="number" step="any" placeholder="إجابتك"><b dir="ltr">${p.u}</b><button class="btn" onclick="chk(${v.p})">تحقق</button><button class="btn alt" onclick="chk(${v.p},1)">اعرض الحل</button></div><div id="fb" class="mt-3"></div>`}});
+function chk(i,s){const p=CP[i],x=parseFloat($('#ans').value),ok=Math.abs(x-p.a)<=Math.abs(p.a)*.03+.005;$('#fb').innerHTML=s?p.s:isNaN(x)?'اكتب إجابتك أولًا.':ok?'<span class="ok">✔ إجابة صحيحة!</span>'+p.s:'<span class="hot">✘ حاول مرة أخرى.</span> تلميح: '+p.h}
+const Q=(q,a,u,h,s)=>({q,a,u,h,s:`<div class="eq">${s}</div>`});
+M.solve=mk('مسائل الحركة في بعد واحد (من الكتاب)','حلّ مسائل «اكتشف بنفسك» بمعادلات الحركة والسقوط الحر ثم تحقق فورًا.',[
+Q('تسير حافلة مدرسية بسرعة 20 m/s وبتسارع 1.5 m/s². ما سرعتها بعد 6 s؟',29,'m/s','v = v₀ + at','v = 20 + 1.5×6 = 29 m/s'),
+Q('بدأ فارس العداء الركض من السكون بتسارع منتظم 4 m/s². ما المسافة بعد 5 s؟',50,'m','Δx = ½at² لأن v₀ = 0','Δx = ½×4×5² = 50 m'),
+Q('سرعة النبضة العصبية 100 m/s. كم الزمن لتنتقل من القدم إلى دماغ رجل طوله 1.7 m؟',.017,'s','t = Δx/v','t = 1.7/100 = 0.017 s'),
+Q('سيارة (أ) بسرعة 80 km/h كبحت وتوقفت بعد 10 m. سيارة (ب) بضعف السرعة وكُبحت بالقوة نفسها. كم تقطع حتى تتوقف؟',40,'m','v² = 2aΔx: الإزاحة تتناسب مع مربع السرعة','ضعف السرعة ⇐ 2² = 4 أمثال: 4×10 = 40 m'),
+Q('سقطت تفاحة من السكون سقوطًا حرًا فوصلت الأرض بعد نصف ثانية. ما سرعتها لحظة الوصول؟',4.9,'m/s','v = gt','v = 9.8×0.5 = 4.9 m/s'),
+Q('قُذفت كرة تنس رأسيًا إلى أعلى بسرعة 22.5 m/s. كم الزمن حتى أقصى ارتفاع؟',2.296,'s','عند القمة v = 0، فـ t = v₀/g','t = 22.5/9.8 ≈ 2.30 s'),
+Q('للكرة نفسها: ما الزمن الكلي في الهواء حتى تعود لمستوى القذف؟',4.59,'s','زمن الصعود = زمن الهبوط','T = 2×2.30 ≈ 4.59 s')]);
+M.solve2=mk('مسائل المتجهات والمقذوفات (من الكتاب)','حلّ مسائل جمع المتجهات والقوى وحركة المقذوفات ثم تحقق فورًا.',[
+Q('يتحرك قارب بسرعة 10 km/h عموديًا على تيار مائي سرعته 8 km/h. ما سرعته بالنسبة لليابسة؟',12.81,'km/h','المتجهان متعامدان: فيثاغورث','v = √(10²+8²) ≈ 12.81 km/h'),
+Q('أثّرت قوة 50 N على جسم كتلته 10 kg. ما مقدار تسارعه؟',5,'m/s²','a = F/m','a = 50/10 = 5 m/s²'),
+Q('أثّر رجل بقوة 50 N شرقًا وآخر بقوة 80 N في الاتجاه نفسه. ما القوة الكلية؟',130,'N','القوتان في الاتجاه نفسه: اجمع','F = 50 + 80 = 130 N شرقًا'),
+Q('لو أثّر الرجل الثاني بـ 80 N غربًا، فما مقدار القوة الكلية (باتجاه الغرب)؟',30,'N','القوتان متعاكستان: اطرح','F = 80 − 50 = 30 N غربًا'),
+Q('ما المركبة الأفقية لقوة 40 N تميل 37° على الأفق؟ (cos37° ≈ 0.8)',32,'N','Fₓ = F cosθ','Fₓ = 40×0.8 = 32 N'),
+Q('قُذف جسم بسرعة 20 m/s بزاوية 30° فوق الأفق. ما زمن التحليق؟',2.04,'s','T = 2v₀sinθ/g','T = 2×20×0.5/9.8 ≈ 2.04 s'),
+Q('للجسم نفسه: ما المدى الأفقي؟ (sin60° ≈ 0.866)',35.35,'m','R = v₀² sin2θ / g','R = 400×0.866/9.8 ≈ 35.35 m'),
+Q('إذا قُذف الجسم بزاوية 60° وبالسرعة نفسها، فما مداه الأفقي؟',35.35,'m','θ و (90°−θ) يعطيان المدى نفسه','sin120° = sin60° ⇒ R ≈ 35.35 m (نفس مدى 30°)')]);
+const HERO=`<div class="hero"><svg viewBox="0 0 220 90" width="200" aria-hidden="true"><path d="M5 85Q110 -40 215 85" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="7 6"/><circle cx="110" cy="22" r="8" fill="var(--ac2)"/></svg><div><h2>اختر نشاطًا، حرّك المنزلقات، وشاهد القانون يتحرك أمامك</h2><p>${Object.keys(M).length} نشاطًا تفاعليًا من كتاب الفيزياء للصف العاشر - الفصل الأول</p></div></div>`;
+function home(){cancelAnimationFrame(RAF);$('#lab').hidden=true;const h=$('#home');h.hidden=false;h.innerHTML=HERO+CH.map(([n,ids])=>`<h2 class="ch">${n}</h2><div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">${ids.map(i=>`<button class="card" onclick="openLab('${i}')"><em>${IC[i]||'⚗️'}</em><b>${M[i].t}</b><span>${M[i].goal}</span></button>`).join('')}</div>`).join('');scrollTo(0,0)}
+function openLab(id){const m=M[id];$('#home').hidden=true;$('#lab').hidden=false;$('#lt').textContent=m.t;$('#lg').innerHTML='<b>الهدف:</b> '+m.goal;const cv=$('#cv');cv.hidden=!!m.nc;const G={c:cv.getContext('2d'),w:cv.width,h:cv.height},v={};
+ $('#ctls').innerHTML=m.ctl.length?m.ctl.map(c=>c.t=='s'?`<div class="ctl"><label>${c.l}</label><select data-k="${c.k}">${c.o.map(o=>`<option value="${o[1]}"${o[1]==c.v?' selected':''}>${o[0]}</option>`).join('')}</select></div>`:`<div class="ctl"><label>${c.l}<output id="o_${c.k}">${c.v}</output></label><input type="range" data-k="${c.k}" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.v}"></div>`).join(''):'<p>نشاط نقاشي: اضغط على العناوين لإظهار الإجابات.</p>';
+ const up=()=>{document.querySelectorAll('#ctls [data-k]').forEach(e=>{v[e.dataset.k]=+e.value;const o=$('#o_'+e.dataset.k);if(o)o.textContent=e.value});try{if(m.draw)m.draw(G,v);$('#res').innerHTML=m.run(v)}catch(e){$('#res').textContent='تحقق من القيم المدخلة.'}};
+ document.querySelectorAll('#ctls [data-k]').forEach(e=>e.oninput=up);window.UP=up;up();scrollTo(0,0)}
+home();
+</script>
+</body>
+</html>
