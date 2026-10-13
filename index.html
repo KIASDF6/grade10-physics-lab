@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>مختبر الفيزياء الذكي - الصف العاشر</title>
+<title>مختبر الفيزياء التفاعلي - الصف العاشر</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <style>
@@ -57,11 +57,27 @@ header h1{font-size:34px}
 .inp{font:inherit;padding:10px;border-radius:10px;border:2px solid var(--gr);width:160px;background:var(--pn);color:var(--tx);direction:ltr}
 .tb{width:100%;border-collapse:collapse;direction:ltr;text-align:center;font-size:20px}.tb th,.tb td{border:1px solid var(--gr);padding:6px}.tb th{background:var(--hl)}
 @media (prefers-reduced-motion:reduce){.card{transition:none}}
+.logo{width:76px;height:76px;border-radius:18px;background:#fff;display:grid;place-items:center;cursor:pointer;overflow:hidden;text-align:center;color:#0b1d4a;font-size:30px;line-height:1.1;flex:none}
+.logo img{max-width:100%;max-height:100%}.logo small{display:block;font-size:12px}
+.hb{display:flex;gap:16px;align-items:center}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.sh{background:var(--pn);border:1px solid var(--gr);border-radius:14px;padding:12px 16px}.sh ol{padding-right:24px;margin:4px 0}
+#ex,#qz{margin-top:14px}#ex h3{color:var(--ac);font-weight:800;margin:6px 0}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;height:46px}
+input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:6px;background:var(--gr)}
+input[type=range]::-moz-range-track{height:10px;border-radius:6px;background:var(--gr)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:34px;margin-top:-12px;border-radius:50%;background:var(--ac);border:4px solid var(--pn);box-shadow:0 2px 8px #0005}
+input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--ac);border:4px solid var(--pn)}
+@media (min-width:1500px){body{font-size:26px}.btn{min-height:64px;font-size:24px}header h1{font-size:42px}.logo{width:96px;height:96px}}
+@media (max-width:640px){header h1{font-size:21px}.hero svg{display:none}.logo{width:56px;height:56px}.btn{width:100%}}
+#rp{display:none}
+@media print{body>*:not(#rp){display:none!important}#rp{display:block;color:#000;direction:rtl;font-size:16px}body{background:#fff!important}#rp .rh{display:flex;gap:16px;align-items:center;border-bottom:3px solid #1f4fd8;margin-bottom:10px}#rp img.lo{height:80px}#rp .btn{display:none}}
+.logo{width:auto;height:84px;padding:4px 12px;pointer-events:none}.logo img{height:100%;width:auto;max-width:none}@media (min-width:1500px){.logo{height:112px}}@media (max-width:640px){.logo{height:54px;padding:3px 8px}}
 </style>
 </head>
 <body>
 <header>
- <div><h1>مختبر الفيزياء الذكي - الصف العاشر</h1><small>إعداد الأستاذ: محمد حجاب</small></div>
+ <div class="hb"><span hidden><img id="sl" alt="" hidden><span id="lp"></span><input id="lf" type="file"></span><div><h1>مختبر الفيزياء التفاعلي - الصف العاشر</h1><small>مدرسة النجاة الثانوية - السالمية - بنين | إعداد الأستاذ: محمد حجاب</small></div></div>
  <div class="flex gap-2"><button class="nb" onclick="home()">🏠 الرئيسية</button><button class="nb" onclick="document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()">⛶ ملء الشاشة</button></div>
 </header>
 <main>
@@ -69,13 +85,14 @@ header h1{font-size:34px}
  <section id="lab" hidden>
   <button class="nb" style="background:var(--ac)" onclick="home()">→ رجوع إلى الدروس</button>
   <h2 id="lt" class="ch" style="margin-top:14px"></h2>
-  <div class="goal" id="lg"></div>
+  <div class="goal" id="lg"></div><div id="sheet"></div><div class="tools"><button class="btn" onclick="startLab()">▶ بدء التجربة</button><button class="btn alt" onclick="resetLab()">↺ إعادة ضبط</button><button class="btn alt" onclick="toggleEx()">💡 عرض التفسير العلمي</button><button class="btn alt" onclick="report()">🖨️ طباعة / PDF</button></div>
   <div class="grid gap-4 lg:grid-cols-3">
    <div class="panel" id="ctls"></div>
-   <div class="lg:col-span-2"><canvas id="cv" width="900" height="460"></canvas><div class="panel res" id="res"></div></div>
+   <div class="lg:col-span-2"><canvas id="cv" width="900" height="460"></canvas><div class="panel res" id="res"></div><div id="ex" class="panel" hidden></div><div id="qz" class="panel"></div></div>
   </div>
  </section>
 </main>
+<div id="rp"></div>
 <script>
 const $=s=>document.querySelector(s),f=n=>String(+(+n).toFixed(2)),R=Math.PI/180,g9=9.8;
 const css=k=>getComputedStyle(document.documentElement).getPropertyValue(k).trim();
@@ -184,11 +201,41 @@ Q('قُذف جسم بسرعة 20 m/s بزاوية 30° فوق الأفق. ما �
 Q('للجسم نفسه: ما المدى الأفقي؟ (sin60° ≈ 0.866)',35.35,'m','R = v₀² sin2θ / g','R = 400×0.866/9.8 ≈ 35.35 m'),
 Q('إذا قُذف الجسم بزاوية 60° وبالسرعة نفسها، فما مداه الأفقي؟',35.35,'m','θ و (90°−θ) يعطيان المدى نفسه','sin120° = sin60° ⇒ R ≈ 35.35 m (نفس مدى 30°)')]);
 const HERO=`<div class="hero"><svg viewBox="0 0 220 90" width="200" aria-hidden="true"><path d="M5 85Q110 -40 215 85" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="7 6"/><circle cx="110" cy="22" r="8" fill="var(--ac2)"/></svg><div><h2>اختر نشاطًا، حرّك المنزلقات، وشاهد القانون يتحرك أمامك</h2><p>${Object.keys(M).length} نشاطًا تفاعليًا من كتاب الفيزياء للصف العاشر - الفصل الأول</p></div></div>`;
+let CUR,QA={};
+const INFO={
+track:['مضمار هوائي، عربة، بوابتان ضوئيتان، خيط، بكرة، كتلة معلّقة، حاسوب.',['ثبّت المضمار أفقيًا وشغّل مضخة الهواء.','ضع البوابتين الضوئيتين وبينهما مسافة مناسبة.','اربط العربة بخيط يمر فوق البكرة وعلّق في طرفه كتلة صغيرة (وزنها F = mg).','اترك العربة تتحرك وسجّل السرعة عند كل بوابة والزمن بينهما.','احسب a = (v − v₀)/Δt، وكرّر ٣ مرات واحسب المتوسط الحسابي.'],'a = (v − v₀)/Δt ، F = mg ، a = mg/(M+m)','تتحرك العربة بتسارع منتظم؛ يزداد التسارع بزيادة الكتلة المعلّقة ويقل بزيادة كتلة العربة، وتتقارب قيم التكرارات مع فروق صغيرة سببها خطأ القياس.','الهواء المتدفق من المضمار يُلغي الاحتكاك تقريبًا، فتكون القوة المحصّلة على المجموعة هي وزن الكتلة المعلّقة mg، وتتسارع الكتلة الكلية (M+m) وفق قانون نيوتن الثاني. أخذ المتوسط يقلل أثر الخطأ العشوائي. (المحاكاة تهمل كتلة البكرة والاحتكاك.)'],
+tube:['أنبوبة زجاجية، مضخة تفريغ هواء، ريشة، عملة معدنية.',['ضع الريشة والعملة في الأنبوبة وأغلقها بإحكام.','ثبّت الأنبوبة رأسيًا واضغط «بدء التجربة» ولاحظ أيهما يصل أولًا.','فرّغ الأنبوبة بالمضخة (اسحب منزلق الهواء إلى 0%).','أعد الإسقاط وقارن النتيجتين.'],'ΣF = ma ، F = mg ، في السقوط الحر a = g = 9.8 m/s²','بوجود الهواء تصل العملة أولًا، وبعد التفريغ تصل الريشة والعملة معًا.','مقاومة الهواء قوة تعاكس الحركة، وتأثيرها في الريشة كبير مقارنة بوزنها الصغير. وعند غياب الهواء تؤثر الجاذبية وحدها، فيكون تسارع الجسمين g نفسه مهما اختلفت كتلتاهما. (الحركة في المحاكاة مبطّأة للمشاهدة.)'],
+gexp:['جهاز السقوط الحر (ساعة إلكترونية، قاعدة، محرر كرات)، كرة معدنية، مسطرة، حاسوب.',['ركّب جهاز السقوط الحر.','سجّل ارتفاع الكرة (Δx).','أسقط الكرة وسجّل الزمن t.','أعد التجربة من ارتفاعات مختلفة وأكمل الجدول.','ارسم 2Δx مقابل t² واحسب ميل الخط.'],'Δx = ½gt² ⇒ 2Δx = g·t² ⇒ g = 2Δx/t²','تقع النقاط تقريبًا على خط مستقيم يمر بالأصل، وميله قريب من 9.8 m/s².','لأن v₀ = 0 تصبح Δx = ½gt²، فالعلاقة بين 2Δx وt² خطية وميلها g. الانحراف البسيط عن 9.8 سببه أخطاء القياس.'],
+fall:['محاكاة: ارتفاع ابتدائي h₀ وسرعة قذف رأسية للأعلى v₀ (إهمال مقاومة الهواء).',['اضبط الارتفاع الابتدائي.','اضبط سرعة القذف (صفر = سقوط حر).','لاحظ المنحنى والنتائج.'],'y = h₀ + v₀t − ½gt² ، v = v₀ − gt ، v² = v₀² + 2gh₀ (عند الاصطدام)','يرتفع الجسم ثم ينخفض، وتكون سرعته صفرًا عند أقصى ارتفاع.','تؤثر الجاذبية وحدها فيتغير المتجه سرعة بمعدل ثابت 9.8 m/s² نحو الأسفل: تتناقص السرعة صعودًا وتتزايد هبوطًا، ويبقى التسارع نحو الأسفل حتى عند القمة.'],
+proj:['محاكاة: سرعة القذف v₀ وزاوية القذف θ (إهمال مقاومة الهواء، والقذف والسقوط عند المستوى نفسه).',['اضبط v₀ وθ.','قارن المسار بمسار الزاوية المتممة (90°−θ) المتقطع.','جرّب 30° و60° ثم 45°.'],'vₓ = v₀cosθ ، v_y = v₀sinθ ، T = 2v₀sinθ/g ، R = v₀²sin2θ/g ، h = (v₀sinθ)²/2g','تعطي الزاويتان θ و(90°−θ) المدى نفسه، ويكون أكبر مدى عند 45°.','الحركة الأفقية بسرعة ثابتة والرأسية بتسارع g، وهما مستقلتان. المدى يتناسب مع sin2θ، وهذه القيمة تتساوى للزاويتين المتتامتين وتبلغ أعظمها عند 45°.']};
+const QZ={
+track:[['إذا زادت الكتلة المعلّقة m مع ثبات كتلة العربة فإن التسارع:',['يزداد','يقل','لا يتغير'],0,'a = mg/(M+m) تزداد بزيادة m.'],['يُحسب التسارع من العلاقة:',['a = (v − v₀)/Δt','a = v·Δt','a = Δx/Δt'],0,'التسارع هو معدل تغير السرعة.']],
+tube:[['في الأنبوبة المفرّغة من الهواء:',['تصل العملة أولًا','تصل الريشة أولًا','تصلان معًا'],2,'لا توجد مقاومة هواء فالتسارع g للجسمين.'],['سبب تأخر الريشة بوجود الهواء:',['وزنها أكبر','مقاومة الهواء كبيرة نسبة إلى وزنها','g أقل عندها'],1,'g واحد للجميع، والفرق سببه مقاومة الهواء.']],
+gexp:[['ميل الخط (2Δx مقابل t²) يساوي:',['g','g/2','1/g'],0,'2Δx = g·t².'],['السرعة الابتدائية في السقوط الحر:',['صفر','9.8 m/s','g/2'],0,'يبدأ الجسم من السكون.']],
+fall:[['عند أقصى ارتفاع في القذف الرأسي:',['السرعة صفر والتسارع صفر','السرعة صفر والتسارع 9.8 m/s² نحو الأسفل','السرعة 9.8 m/s'],1,'الجاذبية مستمرة في التأثير.'],['جسم سقط من السكون، سرعته بعد 2 s (g = 9.8):',['9.8 m/s','19.6 m/s','4.9 m/s'],1,'v = gt = 9.8×2.']],
+proj:[['أكبر مدى أفقي (من المستوى نفسه) يكون عند:',['30°','45°','60°'],1,'R ∝ sin2θ وأعظمها عند 2θ = 90°.'],['المركبة الأفقية لسرعة المقذوف (دون هواء):',['تتناقص','ثابتة','تتزايد'],1,'لا قوة أفقية مؤثرة.']],
+eqs:[['التسارع يساوي ميل منحنى:',['الإزاحة - الزمن','السرعة - الزمن','المسافة - الزمن'],1,'a = Δv/Δt.']],
+resolve:[['إذا كانت θ = 90° فإن Aₓ تساوي:',['A','صفر','A/2'],1,'Aₓ = A cos90° = 0.']],
+add:[['محصلة متجهين متعامدين مقداراهما 3 و4:',['7','5','1'],1,'√(3²+4²) = 5.']],
+prod:[['|A×B| = 0 عندما θ تساوي:',['90°','0° أو 180°','45°'],1,'sinθ = 0.']],
+dist:[['الإزاحة كمية:',['عددية','متجهة'],1,'لها مقدار واتجاه.']],
+xt:[['ميل منحنى (الإزاحة - الزمن) يمثل:',['التسارع','السرعة المتجهة','المسافة'],1,'Δx/Δt.']]};
+function renderInfo(id){const n=INFO[id];$('#sheet').innerHTML=n?`<details open class="sh"><summary>📋 ورقة التجربة: الأدوات والخطوات والقوانين</summary><p><b>الأدوات:</b> ${n[0]}</p><b>الخطوات:</b><ol>${n[1].map(s=>`<li>${s}</li>`).join('')}</ol><p><b>القوانين:</b> <span dir="ltr">${n[2]}</span></p></details>`:'';const e=$('#ex');e.hidden=true;e.innerHTML=n?`<h3>المشاهدة</h3><p>${n[3]}</p><h3>التفسير العلمي</h3><p>${n[4]}</p>`:'<p>هذا نشاط تدريبي، والحل التفصيلي يظهر بعد الإجابة.</p>'}
+function renderQ(id){const Q=QZ[id],q=$('#qz');q.hidden=!Q;if(!Q)return;q.innerHTML='<h3 class="ch" style="font-size:24px">اختبر معلوماتك</h3>'+Q.map(([t,o,c,e],i)=>{const a=QA[id+i];return`<div class="row" style="display:block"><b>${i+1}. ${t}</b><div>${o.map((x,k)=>`<button class="btn${a===k?(k===c?' good':' bad'):' alt'}" onclick="ans('${id}',${i},${k})">${x}</button>`).join('')}</div>${a===undefined?'':`<p>${a===c?'<span class="ok">✔ صحيح.</span>':'<span class="hot">✘ الصحيح: '+o[c]+'.</span>'} ${e}</p>`}</div>`}).join('')}
+function ans(id,i,k){QA[id+i]=k;renderQ(id)}
+function toggleEx(){const e=$('#ex');e.hidden=!e.hidden}
+function startLab(){if(CUR==='tube')drop();else{rr();UP()}}
+function resetLab(){QA={};openLab(CUR)}
+function report(){const d=document.documentElement,t=d.dataset.theme;d.dataset.theme='light';UP();const cv=$('#cv'),L=$('#sl'),img=cv.hidden?'':`<img src="${cv.toDataURL()}" style="width:100%">`;$('#rp').innerHTML=`<div class="rh">${L.hidden?'':`<img class="lo" src="${L.src}">`}<div><h2>تقرير تجربة: ${M[CUR].t}</h2><p>مدرسة النجاة الثانوية - السالمية - بنين - الصف العاشر - الأستاذ محمد حجاب</p><p>التاريخ: ${new Date().toLocaleDateString('ar-KW')}</p></div></div><h3>الهدف</h3><p>${M[CUR].goal}</p><h3>النتائج</h3>${$('#res').innerHTML}${img}<h3>الاستنتاج</h3><p>................................................................</p><p>اسم الطالب: ....................... الشعبة: ........</p>`;window.print();if(t)d.dataset.theme=t;else delete d.dataset.theme;UP()}
+const SL=$('#sl'),LP=$('#lp');
+function setLogo(u){SL.src=u;SL.hidden=false;LP.hidden=true}
+try{const u=localStorage.getItem('logo');if(u)setLogo(u)}catch(e){}
+$('#lf').onchange=e=>{const r=new FileReader();r.onload=()=>{setLogo(r.result);try{localStorage.setItem('logo',r.result)}catch(x){}};if(e.target.files[0])r.readAsDataURL(e.target.files[0])};
 function home(){cancelAnimationFrame(RAF);$('#lab').hidden=true;const h=$('#home');h.hidden=false;h.innerHTML=HERO+CH.map(([n,ids])=>`<h2 class="ch">${n}</h2><div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">${ids.map(i=>`<button class="card" onclick="openLab('${i}')"><em>${IC[i]||'⚗️'}</em><b>${M[i].t}</b><span>${M[i].goal}</span></button>`).join('')}</div>`).join('');scrollTo(0,0)}
 function openLab(id){const m=M[id];$('#home').hidden=true;$('#lab').hidden=false;$('#lt').textContent=m.t;$('#lg').innerHTML='<b>الهدف:</b> '+m.goal;const cv=$('#cv');cv.hidden=!!m.nc;const G={c:cv.getContext('2d'),w:cv.width,h:cv.height},v={};
  $('#ctls').innerHTML=m.ctl.length?m.ctl.map(c=>c.t=='s'?`<div class="ctl"><label>${c.l}</label><select data-k="${c.k}">${c.o.map(o=>`<option value="${o[1]}"${o[1]==c.v?' selected':''}>${o[0]}</option>`).join('')}</select></div>`:`<div class="ctl"><label>${c.l}<output id="o_${c.k}">${c.v}</output></label><input type="range" data-k="${c.k}" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.v}"></div>`).join(''):'<p>نشاط نقاشي: اضغط على العناوين لإظهار الإجابات.</p>';
  const up=()=>{document.querySelectorAll('#ctls [data-k]').forEach(e=>{v[e.dataset.k]=+e.value;const o=$('#o_'+e.dataset.k);if(o)o.textContent=e.value});try{if(m.draw)m.draw(G,v);$('#res').innerHTML=m.run(v)}catch(e){$('#res').textContent='تحقق من القيم المدخلة.'}};
- document.querySelectorAll('#ctls [data-k]').forEach(e=>e.oninput=up);window.UP=up;up();scrollTo(0,0)}
+ document.querySelectorAll('#ctls [data-k]').forEach(e=>e.oninput=up);window.UP=up;up();CUR=id;renderInfo(id);renderQ(id);scrollTo(0,0)}
 home();
 </script>
 </body>
